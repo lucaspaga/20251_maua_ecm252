@@ -1,27 +1,28 @@
 import Comentario from "./Comentario"
 
 const Cartao = (props) => {
-
-    return (
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="" alt="" />
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{props.cabecalho}</h5>
-                        <Comentario
-                            comentario={props.comentario}
-                        />
-                    </div>
-                </div>
+    return(
+        <div className="card border rounded m-2 p-2 shadow" style={{minHeight: 350}}>
+            <div className="card-header text-muted">
+                {props.cabecalho}
             </div>
-            <div className="card-footer  text-body-secondary">
+            <div className="card-body">
+
+                <Comentario
+                    foto = {props.foto}
+                    comentario = {props.comentario}
+                    data = {props.data}
+                />
+            </div>
+            <div className="card-footer">
+            <div className="d-flex justify-content-center">
                 {props.children}
             </div>
+            </div>
         </div>
+
     )
+
 }
 
 export default Cartao

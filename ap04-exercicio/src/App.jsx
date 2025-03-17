@@ -1,12 +1,13 @@
 import React from "react"
 import Cartao from "./Cartao"
 import FeedBack from "./FeedBack"
+import ListaComentarios from"./ListaComentarios"
 
 const App = () => {
   const textoOK = 'Aprovar'
   const textoNOK = 'Nãp aprovar'
-  const funcaoOK = () => alert('Agradecemos a confirmação')
-  const funcaoNOK = () => alert('Verificamos o ocorrido')
+  const funcaoOK = () => alert('Comentário aprovado!')
+  const funcaoNOK = () => alert('Comentário reprovado!')
   const componenteFeedback = (
     <FeedBack
       textoOK={textoOK}
@@ -16,20 +17,18 @@ const App = () => {
     />
   )
 
-  const comentario1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie odio in justo gravida facilisis. Maecenas eget pellentesque est. Nulla metus massa, gravida eget dui sit amet, vehicula facilisis lacus. Nulla vel dolor id magna porttitor malesuada. Pellentesque malesuada sit amet odio vitae bibendum. Fusce consequat ornare nibh sed gravida."
-  const comentario2 = "Cras non dictum velit. Aliquam auctor, velit vitae vestibulum euismod, augue est imperdiet massa, et consectetur diam elit sed nunc. Mauris sodales, nunc sit amet lobortis pretium, purus libero tincidunt erat, nec viverra est neque molestie velit. Vestibulum lacinia a est a imperdiet"
-  const comentario3 = "Sed ex nisi, viverra ut accumsan id, dapibus at mauris. Pellentesque aliquam enim nec lorem mollis interdum. Nullam iaculis consectetur justo eu malesuada. Quisque molestie risus maximus vehicula elementum. Nunc malesuada iaculis erat, at semper dolor auctor ut. Nam ac interdum velit."
-
- 
   return (
-    <div className="container border mt-2">
+    <ListaComentarios>
       <div className="row">
         <div className="col-lg-6 col-xxl-4">
           {/* .card>(.card-header+.card-body)*/}
 
           <Cartao
             cabecalho="Mary.Lockman69"
-            comentario = {comentario1}>
+            comentario =  "Lorem ipsum dolor sit amet. Eum voluptatem veritatis est tempore voluptas eum ipsum enim. Qui quia magnam sit consectetur amet 33 Quis obcaecati."
+            foto = "https://img.freepik.com/fotos-premium/menina-com-fones-de-ouvido-em-fundo-laranja-vibrante-em-perfil_767466-25360.jpg?semt=ais_hybrid"
+            data = {new Date().toDateString()}
+            >
             {componenteFeedback}
           </Cartao>
 
@@ -37,7 +36,10 @@ const App = () => {
         <div className="col-lg-6 col-xxl-4">
           <Cartao
             cabecalho="Brock_Reichel18"
-            comentario = {comentario2}>
+            comentario = "Est quidem voluptatem At voluptatem rerum id doloremque eveniet et velit magni eum sunt vero. Sit deleniti molestiae et deleniti quia qui exercitationem accusantium. "
+            foto = "https://wallpapers.com/images/hd/best-profile-pictures-wqm0z83avja0y31c.jpg"
+            data = {new Date().toDateString()}
+            >
             {componenteFeedback}
           </Cartao>
 
@@ -48,7 +50,10 @@ const App = () => {
 
           <Cartao
             cabecalho="Nils_Steuber"
-            comentario = {comentario3}>
+            comentario = "Sit quam quam et dolor sunt non nemo perferendis nam inventore dolorem rem corrupti quia est dolorem earum ut unde quaerat. "
+            foto = "https://preview.redd.it/ot8wvzl7snd71.png?width=356&format=png&auto=webp&s=43b677fd94fe01e3b2b104eec753481139dbec3b"
+            data = {new Date().toDateString()}
+            >
             {componenteFeedback}
           </Cartao>
 
@@ -56,11 +61,7 @@ const App = () => {
         </div>
   
       </div>
-      <div className="row">
-
-      </div>
-
-    </div>
+    </ListaComentarios>
   )
 }
 export default App

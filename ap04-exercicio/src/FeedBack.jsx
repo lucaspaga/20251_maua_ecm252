@@ -6,12 +6,12 @@ const FeedBack = props => {
    <div className="d-flex justify-content-evenly m-2">
     <>
         <button 
-            className='btn btn-primary'
+            className='btn btn-primary me-2'
             type = "button" onClick={props.funcaoOK}>
         {props.textoOK}
         </button>
         <button 
-            className='btn btn-danger'
+            className='btn btn-danger me-2'
             type = "button" 
             onClick={props.funcaoNOK}
         >

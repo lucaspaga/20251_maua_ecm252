@@ -18,7 +18,7 @@ const App = () => {
   return (
     <div className="container border mt-2">
       <div className="row">
-        <div className="col-lg-6 col-xxl-4">
+        <div className="col-12">
           {/* .card>(.card-header+.card-body)*/}
 
           <Cartao
@@ -31,7 +31,7 @@ const App = () => {
           </Cartao>
 
         </div>
-        <div className="col-lg-6 col-xxl-4">
+        <div className="col-12">
           <Cartao
             cabecalho={new Date().toDateString()}>
             <Pedido
