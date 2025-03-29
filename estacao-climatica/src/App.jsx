@@ -1,5 +1,7 @@
 //rafce
 import React from 'react'
+import Hippo from './Hippo.jsx'
+import EstacaoClimatica from './EstacaoClimatica.jsx'
 
 const estacoes = {
   VERAO: {
@@ -26,17 +28,40 @@ const estacoes = {
 }
 
 class App extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
+  
+  state = {
       latitude: null,
       longitude: null,
       estacao: null,
       data: null,
       icone: null,
       mensagemDeErro:null
-    }
+  }
+
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     latitude: null,
+  //     longitude: null,
+  //     estacao: null,
+  //     data: null,
+  //     icone: null,
+  //     mensagemDeErro:null
+  //   }
+  //   console.log('consrtructor')
+  // }
+
+  componentDidMount(){
+    console.log('componenteDidMount')
+    this.obterLocalizacao()
+  }
+
+  componentDidUpdate(){
+    console.log('componenteDidUpdate')
+  }
+
+  componentWillUnmount(){
+    console.log('componenteWillUnmount')
   }
 
 
@@ -98,42 +123,22 @@ class App extends React.Component {
 
 
   render() {
+    console.log('render')
     return (
       <div className="container mt-2 text-center">
           <div className="row justify-content-center">
+          <Hippo />
             <div className="col-sm-12 col-lg-6 col-xxl-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between align-items-center border rounded mb-2">
-                    <i className={`fa-${this.state.icone} fas fa-5x`}></i>
-                    <h1>{this.state.estacao}</h1>
-                    <div></div>
-                  </div >
-                  <div>
-                    <p className="text-center">
-                    {
-                    this.state.latitude ? 
-                    `Coordernadas: ${this.state.latitude}, ${this.state.longitude} Data: ${this.state.data}`
-                    :
-                    this.setState.mensagemDeErro ?
-                      `${this.state.mensagemDeErro}`
-                      :
-                      "Clique para saber sua localização"
-                    }
-                    </p>
-                  </div>
-                </div>
-                <div className="card-footer">
-                  <div className="d-flex justify-content-center align-items-center">
-                    <button
-                      className='btn btn-primary w-100 mt-3'
-                      type="button"
-                      onClick={this.obterLocalizacao}>
-                      Qual a minha localização?
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <EstacaoClimatica 
+              latitude = {this.state.latitude}
+              longitude = {this.state.longitude}
+              data = {this.state.data}
+              estacao = {this.state.estacao}
+              icone = {this.state.icone}
+              mensagemDeErro={this.state.mensagemDeErro}
+              obterLocalizacao={this.obterLocalizacao}
+              />
+
             </div>
           </div>
       </div>
