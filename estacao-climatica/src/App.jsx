@@ -2,6 +2,7 @@
 import React from 'react'
 import Hippo from './Hippo.jsx'
 import EstacaoClimatica from './EstacaoClimatica.jsx'
+import Loading from './Loading.jsx'
 
 const estacoes = {
   VERAO: {
@@ -28,14 +29,13 @@ const estacoes = {
 }
 
 class App extends React.Component {
-  
+
   state = {
-      latitude: null,
-      longitude: null,
-      estacao: null,
-      data: null,
-      icone: null,
-      mensagemDeErro:null
+    latitude: null,
+    longitude: null,
+    estacao: null,
+    icone: null,
+    mensagemDeErro: null
   }
 
   // constructor(props) {
@@ -51,16 +51,16 @@ class App extends React.Component {
   //   console.log('consrtructor')
   // }
 
-  componentDidMount(){
+  componentDidMount() {
     console.log('componenteDidMount')
     this.obterLocalizacao()
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     console.log('componenteDidUpdate')
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     console.log('componenteWillUnmount')
   }
 
@@ -105,7 +105,6 @@ class App extends React.Component {
           {
             latitude: crd.latitude,
             longitude: crd.longitude,
-            data: formatter.format(dataAtual),
             estacao: estacao.nome,
             icone: estacao.icone
           }
@@ -126,21 +125,36 @@ class App extends React.Component {
     console.log('render')
     return (
       <div className="container mt-2 text-center">
-          <div className="row justify-content-center">
-          <Hippo />
-            <div className="col-sm-12 col-lg-6 col-xxl-4">
-              <EstacaoClimatica 
-              latitude = {this.state.latitude}
-              longitude = {this.state.longitude}
-              data = {this.state.data}
-              estacao = {this.state.estacao}
-              icone = {this.state.icone}
-              mensagemDeErro={this.state.mensagemDeErro}
-              obterLocalizacao={this.obterLocalizacao}
-              />
-
-            </div>
+        <div className="row justify-content-center">
+          <div className="col-sm-12 col-lg-6 col-xxl-4">
+            <Hippo />
           </div>
+        </div>
+        <div className="row justify-content-center">
+          <div className="col-sm-12 col-lg-6 col-xxl-4">
+            {
+              (!this.state.latitude && !this.state.mensagemDeErro)?
+              <Loading mensagem = "Por favor, autorize o acesso à localização..."/>
+              :
+                this.state.mensagemDeErro ?
+                //p.border.rounded.p-2.fs-1.text-center
+                <p className="border rounded p-2 fs-1 text-center">
+                  É preciso dar permissão para localização
+                </p>
+                :
+                <EstacaoClimatica
+                latitude={this.state.latitude}
+                longitude={this.state.longitude}
+                data={this.state.data}
+                estacao={this.state.estacao}
+                icone={this.state.icone}
+                mensagemDeErro={this.state.mensagemDeErro}
+                obterLocalizacao={this.obterLocalizacao}
+            />
+            }
+
+          </div>
+        </div>
       </div>
 
 
