@@ -4,56 +4,57 @@
 import 'dart:io';
 import 'dart:math';
 
-enum opcoesJogo {
+enum OPCAO {
   pedra, papel, tesoura, sair
 }
+void exibir(String texto){
+  print(texto);
+}
+
+int pegarOpcaoUsuario(){
+  return int.parse(stdin.readLineSync()!);
+}
+
+bool opcaoEhValida(opcao){
+  return (opcao >=1 && opcao <=4);
+}
+
+OPCAO mapearOpcao(int opcao){
+  return OPCAO.values[opcao - 1];
+}
+
+String decidirResultado(OPCAO opcaoUser, OPCAO opcaoComp){
+  const voceVenceu = "Você venceu!";
+  if(opcaoUser == opcaoComp) return "Empate";
+  if(opcaoUser == OPCAO.pedra && opcaoComp == OPCAO.tesoura) return voceVenceu;
+  if(opcaoUser == OPCAO.papel && opcaoComp == OPCAO.pedra) return voceVenceu;
+  if(opcaoUser == OPCAO.tesoura && opcaoComp == OPCAO.papel) return voceVenceu;
+  return "Você perdeu!!!";
+}
+
 void jogo(){
   //enquanto usuário nao quiser sair
     //exibir menu
-    int opcao = 0;
+    int opUsuarioInt;
+    OPCAO opUsuario, opComputador;
     do{
-
-      var gerador = Random();
-
-      print('Escolha uma opção: ');
-      print('1 - Pedra');
-      print('2 - Papel');
-      print('3 - Tesoura');
-      print('4 - Sair');
-
-      int opcaoMaquina = gerador.nextInt(5);
-      var escolhaMaquina;
-      switch(opcaoMaquina){
-        case 1:
-          escolhaMaquina = opcoesJogo.pedra.name;
-        case 2:
-          escolhaMaquina = opcoesJogo.papel.name;
-        case 3:
-          escolhaMaquina = opcoesJogo.tesoura.name;
+      do{
+          exibir("Escolha uma opção: ");
+          exibir("1-Pedra\n2-Papel\n3-Tesoura\n4-Sair");
+          opUsuarioInt = (pegarOpcaoUsuario());
+      }while(!opcaoEhValida(opUsuarioInt));
+      opUsuario = mapearOpcao(opUsuarioInt);
+      switch(opUsuario){
+        case OPCAO.sair:
+          exibir("Até!");
         default:
-          print("Opção invalida");
+          opComputador= mapearOpcao(Random().nextInt(3) + 1);
+          exibir('Você(${opUsuario.name}) VS (${opComputador.name})Computador');
+          final resultado = decidirResultado(opUsuario, opComputador);
+          exibir(resultado);
+          sleep(Duration(seconds: 3));
       }
-      
-      final opcaoTextual = stdin.readLineSync();
-      if(opcaoTextual == null){
-        print('Digite uma opção');
-      }else{
-        opcao = int.parse(opcaoTextual);
-        var escolhaJogador;
-        switch(opcao){
-          case 1:
-            escolhaJogador = opcoesJogo.pedra.name;
-          case 2:
-            escolhaJogador = opcoesJogo.papel.name;
-          case 3:
-            escolhaJogador = opcoesJogo.tesoura.name;
-          default:
-            print("Opção invalida");
-      }}
-      
-      print(opcao);
-
-    }while(opcao != 4);
+    }while(opUsuario != OPCAO.sair);
     }
 
     //capturar a opção do usuário, validadno
